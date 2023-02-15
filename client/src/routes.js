@@ -13,6 +13,7 @@ export const useRoutes = (isAuthenticated) => {
           {/* <LinksPage /> */}
         </Route>
         <Route exact path="/create" element={<CreatePage />}>
+          {/* element={!isAuthenticated ? <AuthPage /> : <CreatePage />} */}
           {/* <CreatePage /> */}
         </Route>
         <Route exact path="/detail/:id" element={<DetailPage />}>

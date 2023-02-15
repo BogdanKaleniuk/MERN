@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const bctypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 const config = require("config");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
@@ -34,14 +34,13 @@ router.post(
         return res.status(400).json({ message: "Такий користувач вже існує" });
       }
 
-      const heshedPassword = await bcrypt.hash(password, 12);
+      const hashedPassword = await bcrypt.hash(password, 12);
 
-      const user = new User({ email, password: heshedPassword });
-      console.log("user", user);
+      const user = new User({ email, password: hashedPassword });
       await user.save();
       res.status(201).json({ message: "Користувач створений" });
     } catch (e) {
-      res.status(500).json({ message: "Щось пішло не так, пробуйте знову" });
+      res.status(500).json({ message: "Щось пішло не так, спробуйте знову" });
     }
   }
 );
